@@ -1,29 +1,19 @@
 import { Button, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import NumberContainer from '../components/NumberContainer';
+import NameContainer from '../components/NameContainer';
 import Card from '../components/Card';
 
 const GameScreen = ({userOption}) => {
 
-    const generateRandomBetween = (min, max, exclude) => {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        const rndNum = Math.floor(Math.random() * (max - min)) + min;
-        if (rndNum === exclude) {
-            return generateRandomBetween(min, max, exclude);
-        } else {
-            return rndNum;
-        }
-    };
-    const [currentGuess, setCurrentGuess] = React.useState(generateRandomBetween(1, 100, userOption));
+  const handleChau = () => {
+    console.log('Chau ',userOption)
+  }
 
   return (
     <View style={styles.screen}>
-      <Text>La suposicion del oponente</Text>
-      <NumberContainer>{currentGuess}</NumberContainer>
+      <Text>Hola {userOption}</Text>
       <Card style={styles.buttonContainer}>
-        <Button title='MAYOR' onPress={() => {}}/>
-        <Button title='MENOR'onPress={() => {}}/>
+        <Button title='Decir chau' onPress={handleChau}/>
       </Card>
     </View>
   )

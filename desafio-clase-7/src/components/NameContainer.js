@@ -2,18 +2,18 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Colors from '../constants/Colors'
 
-const NumberContainer = ({children}) => {
+const NameContainer = ({children}) => {
   return (
-    <View style={styles.conatiner}>
-      <Text style={styles.number}>{children}</Text>
+    <View style={styles.container}>
+      <Text style={styles.name}>{children}</Text>
     </View>
   )
 }
 
-export default NumberContainer
+export default NameContainer
 
 const styles = StyleSheet.create({
-    conatiner:{
+    container:{
         borderWidth:2,
         borderColor: Colors.accent,
         padding: 10,

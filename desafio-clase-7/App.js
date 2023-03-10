@@ -25,10 +25,10 @@ export default function App() {
 
   }, [fontsLoaded])
 
-  const [userNumber, setUserNumber] = React.useState();
+  const [userName, setUserName] = React.useState();
 
-  const startGameHandler = (selectedNumber) => {
-    setUserNumber(selectedNumber);
+  const startGameHandler = (selectedName) => {
+    setUserName(selectedName);
   };
 
   if (!fontsLoaded) {
@@ -36,11 +36,11 @@ export default function App() {
   }
   return (
     <View style={styles.container}>
-      <Header title="Adivina el numero" />
+      <Header title="A saludar" />
       {
-        !userNumber
+        !userName
           ? <StartGameScreen onStartGame={startGameHandler} />
-          : <GameScreen userOption={userNumber} />
+          : <GameScreen userOption={userName} />
       }
     </View>
   );

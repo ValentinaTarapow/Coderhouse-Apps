@@ -3,7 +3,7 @@ import React from 'react'
 import Card from '../components/Card'
 import COLORS from '../constants/Colors'
 import Input from '../components/Input'
-import NumberContainer from '../components/NumberContainer'
+import NameContainer from '../components/NameContainer'
 import { titleStyle } from '../constants/TextStyles'
 
 
@@ -11,10 +11,10 @@ const StartGameScreen = ({ onStartGame }) => {
 
   const [enteredValue, setEnteredValue] = React.useState('')
   const [confirmed, setConfirmed] = React.useState(false)
-  const [selectedNumber, setSelectedNumber] = React.useState()
+  const [selectedName, setSelectedName] = React.useState()
 
-  const numberInputHandler = inputText => {
-    setEnteredValue(inputText.replace(/[^0-9]/g, ''))
+  const nameInputHandler = inputText => {
+    setEnteredValue(inputText, '')
   }
 
   const resetInputHandler = () => {
@@ -23,12 +23,12 @@ const StartGameScreen = ({ onStartGame }) => {
   }
 
   const confirmInputHandler = () => {
-    const chosenNumber = parseInt(enteredValue)
-    if (chosenNumber === NaN || chosenNumber <= 0 || chosenNumber > 99) {
+    const chosenName = enteredValue
+    if (typeof chosenName !== 'string') {
       return
     }
     setConfirmed(true)
-    setSelectedNumber(chosenNumber)
+    setSelectedName(chosenName)
     setEnteredValue('')
   }
 
@@ -39,15 +39,13 @@ const StartGameScreen = ({ onStartGame }) => {
       <View style={styles.container}>
         <Text style={styles.title}>Comenzar Juego</Text>
         <Card style={styles.inputContainer}>
-          <Text style={styles.inputDectiptionText}>Elija un numero</Text>
+          <Text style={styles.inputDectiptionText}>Ingrese su nombre</Text>
           <Input style={styles.input}
             blurOnSubmit
-            autoCapitalize='none'
             autoCorrect={false}
-            keyboardType='number-pad'
-            maxLength={2}
+            maxLength={10}
             value={enteredValue}
-            onChangeText={numberInputHandler}
+            onChangeText={nameInputHandler}
           />
           <View style={styles.buttonsContainer}>
             <View style={styles.button}>
@@ -59,11 +57,11 @@ const StartGameScreen = ({ onStartGame }) => {
           </View>
         </Card>
         {confirmed &&
-          <Card style={styles.selectedNumberContainer}>
-            <Text>Tu seleccion</Text>
-            <NumberContainer>{selectedNumber}</NumberContainer>
+          <Card style={styles.selectedNameContainer}>
+            <Text>Tu nombre</Text>
+            <NameContainer>{selectedName}</NameContainer>
             <Button title="Iniciar Juego" onPress={()=>{
-              onStartGame(selectedNumber)
+              onStartGame(selectedName)
             }} color={COLORS.primary}/>
           </Card>
         }
@@ -105,7 +103,7 @@ const styles = StyleSheet.create({
   button: {
     width: 100
   },
-  selectedNumberContainer:{
+  selectedNameContainer:{
     marginTop: 20,
     width: 200,
     maxWidth: '80%',
